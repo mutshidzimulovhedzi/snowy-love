@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>For Snowy ❤️</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      font-family: Georgia, serif;
+      background: radial-gradient(circle at center, #3b1025, #12030b 70%);
+      color: white;
+    }
+
+    /* Opening screen */
+    .opening {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 10;
+      background: radial-gradient(circle, #40152b, #10030a);
+      transition: opacity 1.5s ease;
+    }
+
+    .opening h1 {
+      font-size: clamp(40px, 10vw, 75px);
+      margin-bottom: 35px;
+      animation: glow 2s infinite alternate;
+    }
+
+    .open-button {
+      padding: 16px 35px;
+      border: none;
+      border-radius: 50px;
+      background: #ff477e;
+      color: white;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 25px rgba(255, 71, 126, 0.6);
+      transition: 0.3s;
+    }
+
+    .open-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 40px rgba(255, 71, 126, 0.9);
+    }
+
+    /* Main message */
+    .message {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 30px;
+      opacity: 0;
+      transform: scale(0.8);
+      transition: all 2s ease;
+    }
+
+    .message.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .content {
+      max-width: 750px;
+      z-index: 2;
+    }
+
+    .small {
+      font-size: 22px;
+      color: #ffb6ca;
+      margin-bottom: 20px;
+    }
+
+    .love-title {
+      font-size: clamp(45px, 10vw, 85px);
+      color: #ff6f9c;
+      text-shadow:
+        0 0 10px #ff477e,
+        0 0 30px #ff477e;
+      animation: heartbeat 1.5s infinite;
+      margin-bottom: 30px;
+    }
+
+    .message-text {
+      font-size: clamp(18px, 4vw, 25px);
+      line-height: 1.8;
+      color: #ffe6ed;
+    }
+
+    .signature {
+      margin-top: 35px;
+      font-size: 25px;
+      color: #ff9fba;
+      font-style: italic;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -50px;
+      pointer-events: none;
+      animation: floatUp linear forwards;
+      z-index: 1;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    @keyframes heartbeat {
+      0%, 100% {
+        transform: scale(1);
+      }
+
+      50% {
+        transform: scale(1.08);
+      }
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #ff477e;
+      }
+
+      to {
+        text-shadow:
+          0 0 20px #ff477e,
+          0 0 40px #ff477e;
+      }
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- OPENING -->
+  <div class="opening" id="opening">
+
+    <h1 id="typing"></h1>
+
+    <button class="open-button" onclick="openHeart()">
+      Open My Heart ❤️
+    </button>
+
+  </div>
+
+
+  <!-- MAIN MESSAGE -->
+  <div class="message" id="message">
+
+    <div class="content">
+
+      <div class="small">
+        Dear Snowy...
+      </div>
+
+      <h1 class="love-title">
+        I Love You ❤️
+      </h1>
+
+      <p class="message-text">
+        I don't think words will ever be enough to explain
+        how much you mean to me.
+        <br><br>
+
+        You are someone incredibly special to me,
+        and every moment with you is something
+        I treasure.
+        <br><br>
+
+        If I could give you one thing in this world,
+        it would be the ability to see yourself
+        through my eyes...
+        because then you would understand
+        just how amazing you truly are.
+      </p>
+
+      <div class="signature">
+        Forever yours,<br>
+        — Mulovhedzi ❤️
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <script>
+
+    /* Typing effect */
+    const text = "Snowy...";
+    const typingElement = document.getElementById("typing");
+
+    let index = 0;
+
+    function typeText() {
+
+      if (index < text.length) {
+
+        typingElement.innerHTML += text.charAt(index);
+
+        index++;
+
+        setTimeout(typeText, 250);
+
+      }
+
+    }
+
+    typeText();
+
+
+    /* Open heart */
+    function openHeart() {
+
+      const opening = document.getElementById("opening");
+      const message = document.getElementById("message");
+
+      opening.style.opacity = "0";
+
+      setTimeout(() => {
+
+        opening.style.display = "none";
+
+        message.classList.add("show");
+
+      }, 1200);
+
+      // Start hearts
+      setInterval(createHeart, 300);
+
+    }
+
+
+    /* Floating hearts */
+    function createHeart() {
+
+      const heart = document.createElement("div");
+
+      heart.classList.add("heart");
+
+      const hearts = ["❤️", "💕", "💗", "💖", "💘", "💓"];
+
+      heart.innerHTML =
+        hearts[Math.floor(Math.random() * hearts.length)];
+
+      heart.style.left = Math.random() * 100 + "vw";
+
+      heart.style.fontSize =
+        (15 + Math.random() * 35) + "px";
+
+      heart.style.animationDuration =
+        (4 + Math.random() * 5) + "s";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 9000);
+
+    }
+
+  </script>
+
+</body>
+</html>
